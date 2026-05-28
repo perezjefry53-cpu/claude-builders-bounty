@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>PR #133 - clearSession Fix</title><style>
+  body { background: #1e1e2e; color: #cdd6f4; font-family: 'Segoe UI', sans-serif; padding: 20px; max-width: 800px; margin: auto; }
+  h1 { color: #f38ba8; border-bottom: 2px solid #f38ba8; }
+  .section { background: #181825; border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 4px solid #89b4fa; }
+  .code { background: #11111b; padding: 15px; border-radius: 8px; font-family: monospace; overflow-x: auto; font-size: 13px; }
+  .diff-add { color: #a6e3a1; } .diff-remove { color: #f38ba8; }
+  h2 { color: #a6e3a1; }
+  .check { color: #a6e3a1; }
+  .footer { margin-top: 30px; text-align: center; color: #6c7086; }
+  .before-after { display: flex; gap: 15px; flex-wrap: wrap; }
+  .box { flex: 1; min-width: 200px; background: #11111b; border-radius: 8px; padding: 15px; }
+  .box-title { font-weight: bold; margin-bottom: 10px; }
+  .box.before { border-left: 3px solid #f38ba8; } .box.after { border-left: 3px solid #a6e3a1; }
+  .before .box-title { color: #f38ba8; } .after .box-title { color: #a6e3a1; }
+  .field { padding: 5px 0; }
+  .null { color: #6c7086; font-style: italic; }
+  .empty { color: #f9e2af; }
+</style></head>
+<body>
+  <h1>🧹 PR #133 — clearSession Fix (Bounty #20)</h1>
+  <p>Limpieza completa de sesión al cerrar sesión</p>
+
+  <div class="section">
+    <h2>📝 Cambio (diff)</h2>
+    <div class="code">
+<span class="diff-remove">-  token.value = '';</span>
+<span class="diff-add">+  token.value = null;</span>
+<span class="diff-add">+  errorMessage.value = '';</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🔍 Antes vs Después</h2>
+    <div class="before-after">
+      <div class="box before">
+        <div class="box-title">❌ Antes (bug)</div>
+        <div class="field">token: <span class="empty">""</span> (string vacío)</div>
+        <div class="field">user: null ✅</div>
+        <div class="field">errorMessage: <span class="empty">"error anterior"</span> 🐛</div>
+        <div class="field" style="color:#f38ba8;">⚠️ Session no se limpia correctamente</div>
+      </div>
+      <div class="box after">
+        <div class="box-title">✅ Después (fix)</div>
+        <div class="field">token: <span class="null">null</span> ✅</div>
+        <div class="field">user: null ✅</div>
+        <div class="field">errorMessage: <span class="null">''</span> ✅</div>
+        <div class="field" style="color:#a6e3a1;">✅ Session limpia completamente</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>✅ Flujo de cierre de sesión</h2>
+    <div class="code">
+1. disconnectWebSocket() ✓
+2. stopDashboardRealtime() ✓
+3. token.value = null ✓ (antes: '')
+4. user.value = null ✓
+5. authVisible.value = false ✓
+6. errorMessage.value = '' ✓ (ANTES SE QUEDABA!)
+7. dashboardProjects.value = [] ✓
+8. dashboardTasks.value = [] ✓
+9. dashboardLedgerEntries.value = [] ✓</div>
+  </div>
+
+  <div class="section">
+    <h2>🧪 Verificación</h2>
+    <ul>
+      <li><span class="check">✅</span> Backend logout completado/falla correctamente</li>
+      <li><span class="check">✅</span> Token local se limpia (null vs '')</li>
+      <li><span class="check">✅</span> errorMessage se resetea (nuevo)</li>
+      <li><span class="check">✅</span> Datos del dashboard desaparecen</li>
+      <li><span class="check">✅</span> Navegación vuelve a estado invitado</li>
+      <li><span class="check">✅</span> Re-inicio de sesión sigue funcionando</li>
+    </ul>
+  </div>
+
+  <div class="footer">✅ 1 archivo • +2/-1 líneas • Fix de sesión completo</div>
+</body></html>

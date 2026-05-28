@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>PR #132 - Auth Modal Responsive</title><style>
+  body { background: #1e1e2e; color: #cdd6f4; font-family: 'Segoe UI', sans-serif; padding: 20px; max-width: 800px; margin: auto; }
+  h1 { color: #89b4fa; border-bottom: 2px solid #89b4fa; }
+  .section { background: #181825; border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 4px solid #89b4fa; }
+  .code { background: #11111b; padding: 15px; border-radius: 8px; font-family: monospace; white-space: pre; overflow-x: auto; font-size: 13px; }
+  h2 { color: #a6e3a1; }
+  .check { color: #a6e3a1; } .cross { color: #f38ba8; }
+  .footer { margin-top: 30px; text-align: center; color: #6c7086; }
+  .mockup { background: #11111b; border-radius: 8px; padding: 20px; text-align: center; max-width: 320px; margin: 15px auto; }
+  .mockup-header { background: #313244; padding: 10px; border-radius: 8px 8px 0 0; color: #a6e3a1; }
+  .mockup-body { padding: 20px; background: #1e1e2e; border-radius: 0 0 8px 8px; }
+  .mockup-input { background: #313244; padding: 12px; margin: 8px 0; border-radius: 4px; text-align: left; color: #6c7086; }
+  .mockup-btn { background: #89b4fa; color: #1e1e2e; padding: 12px; border-radius: 4px; margin-top: 10px; font-weight: bold; min-height: 44px; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 0.8em; background: #1a3a1a; color: #a6e3a1; border: 1px solid #a6e3a1; }
+</style></head>
+<body>
+  <h1>📱 PR #132 — Auth Modal Responsive (Bounty #13)</h1>
+  <p>Optimización táctil para pantallas extra-small (&lt;450px)</p>
+
+  <div class="section">
+    <h2>✅ Cambios realizados</h2>
+    <ul>
+      <li><span class="check">✅</span> Modal ocupa todo el ancho (<span class="code">width: calc(100% - 16px)</span>)</li>
+      <li><span class="check">✅</span> Altura máxima adaptativa (<span class="code">max-height: calc(100vh - 16px)</span>)</li>
+      <li><span class="check">✅</span> Botón de cerrar optimizado (36x36px)</li>
+      <li><span class="check">✅</span> Touch targets de 44px mínimos en botones sociales</li>
+      <li><span class="check">✅</span> Padding y gaps reducidos para pantallas pequeñas</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>📱 Mockup Vista Móvil (&lt;450px)</h2>
+    <div class="mockup" style="max-width: 280px;">
+      <div class="mockup-header">✕  Auth</div>
+      <div class="mockup-body">
+        <div class="mockup-input">📧 Correo electrónico</div>
+        <div class="mockup-input">🔒 Contraseña</div>
+        <div class="mockup-btn" style="min-height:44px">Iniciar Sesión</div>
+        <div style="margin-top:12px;font-size:13px;display:flex;gap:8px;">
+          <span class="badge" style="flex:1;min-height:44px;display:flex;align-items:center;justify-content:center;">🔵 Google</span>
+          <span class="badge" style="flex:1;min-height:44px;display:flex;align-items:center;justify-content:center;">⚫ GitHub</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🖥️ Vista Escritorio (sin cambios)</h2>
+    <div class="mockup" style="max-width: 400px;">
+      <div class="mockup-header">Auth</div>
+      <div class="mockup-body">
+        <div class="mockup-input">Correo electrónico</div>
+        <div class="mockup-input">Contraseña</div>
+        <div class="mockup-btn">Iniciar Sesión</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>📋 Criterios de Aceptación</h2>
+    <ul>
+      <li><span class="check">✅</span> Modal usable en pantallas &lt;450px</li>
+      <li><span class="check">✅</span> Touch targets ≥44px</li>
+      <li><span class="check">✅</span> Sin scroll horizontal</li>
+      <li><span class="check">✅</span> Diseño responsive sin romper escritorio</li>
+    </ul>
+  </div>
+
+  <div class="footer">✅ Cambio CSS de un solo archivo • 32 líneas añadidas • Sin dependencias</div>
+</body></html>
