@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>PR #135 - Dashboard Responsive</title><style>
+  body { background: #1e1e2e; color: #cdd6f4; font-family: 'Segoe UI', sans-serif; padding: 20px; max-width: 800px; margin: auto; }
+  h1 { color: #f38ba8; border-bottom: 2px solid #f38ba8; }
+  .section { background: #181825; border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 4px solid #89b4fa; }
+  .code { background: #11111b; padding: 15px; border-radius: 8px; font-family: monospace; white-space: pre; overflow-x: auto; font-size: 13px; }
+  .diff-add { color: #a6e3a1; } h2 { color: #a6e3a1; }
+  .check { color: #a6e3a1; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: #11111b; border-radius: 8px; padding: 15px; }
+  .card-title { font-weight: bold; margin-bottom: 10px; color: #89b4fa; }
+  .sidebar { background: #181825; padding: 10px; border-radius: 4px; }
+  .sidebar-item { padding: 8px; margin: 4px 0; background: #313244; border-radius: 4px; font-size: 12px; min-height: 36px; display: flex; align-items: center; }
+  .mini-card { background: #313244; padding: 10px; border-radius: 4px; margin: 6px 0; font-size: 12px; }
+  .footer { margin-top: 30px; text-align: center; color: #6c7086; }
+</style></head>
+<body>
+  <h1>📱 PR #135 — Dashboard Responsive (Bounty #16 - 2000 MRG)</h1>
+  <p>Mejoras responsive para pantallas extra-small (&lt;400px)</p>
+
+  <div class="section">
+    <h2>📝 Cambios realizados</h2>
+    <div class="code"><span class="diff-add">+  min-height: 36px;  /* botones de acción */</span>
+<span class="diff-add">+  padding: 8px 6px;  /* sidebar compacto */</span>
+<span class="diff-add">+  min-height: 36px;  /* nav buttons */</span>
+<span class="diff-add">+  grid-template-columns: 1fr;  /* payment history */</span>
+<span class="diff-add">+  font-size: 12px;  /* toast compacto */</span></div>
+  </div>
+
+  <div class="section">
+    <h2>📱 Vista Móvil (&lt;400px) vs 🖥️ Escritorio</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="card-title">📱 Móvil (&lt;400px)</div>
+        <div class="sidebar">
+          <div class="sidebar-item">🏠 Dashboard</div>
+          <div class="sidebar-item">📊 Projects</div>
+          <div class="sidebar-item">👥 Team</div>
+        </div>
+        <div class="mini-card">📋 Payment: 200 MRG - Complete</div>
+        <div class="mini-card" style="font-size:11px;padding:6px 8px;">🔔 Toast message compacto</div>
+      </div>
+      <div class="card">
+        <div class="card-title">🖥️ Escritorio (sin cambios)</div>
+        <div class="sidebar" style="display:flex;gap:4px;">
+          <div class="sidebar-item" style="flex:1;">🏠</div>
+          <div class="sidebar-item" style="flex:1;">📊</div>
+          <div class="sidebar-item" style="flex:1;">👥</div>
+        </div>
+        <div class="mini-card" style="font-size:14px;">📋 Payment History en grid</div>
+        <div class="mini-card" style="font-size:13px;">🔔 Toast normal</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>✅ Criterios cumplidos</h2>
+    <ul>
+      <li><span class="check">✅</span> Sidebar compacto en móvil</li>
+      <li><span class="check">✅</span> Botones de navegación con touch targets (36px min)</li>
+      <li><span class="check">✅</span> Payment history en una columna</li>
+      <li><span class="check">✅</span> Toast más compacto</li>
+      <li><span class="check">✅</span> Sin cambios en vista escritorio (&gt;400px no afectado)</li>
+      <li><span class="check">✅</span> Builds pasan</li>
+    </ul>
+  </div>
+
+  <div class="footer">✅ 1 archivo • +17 líneas • CSS responsive para &lt;400px</div>
+</body></html>
