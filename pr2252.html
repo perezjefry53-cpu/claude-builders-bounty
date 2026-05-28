@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>PR #2252 - CLAUDE.md</title><style>
+  body { background: #1e1e2e; color: #cdd6f4; font-family: 'Segoe UI', sans-serif; padding: 20px; max-width: 900px; margin: auto; }
+  h1 { color: #89b4fa; border-bottom: 2px solid #89b4fa; }
+  h2 { color: #a6e3a1; margin-top: 25px; }
+  h3 { color: #f9e2af; }
+  .tagline { color: #6c7086; font-style: italic; }
+  .section { background: #181825; border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 4px solid #89b4fa; }
+  .rule { background: #2a1a1a; border-left: 4px solid #f38ba8; padding: 12px; margin: 10px 0; border-radius: 4px; }
+  .rule h3 { margin-top: 0; color: #f38ba8; }
+  .code { background: #11111b; padding: 3px 6px; border-radius: 3px; font-family: monospace; color: #fab387; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+  th, td { padding: 10px; text-align: left; border-bottom: 1px solid #313244; }
+  th { background: #181825; color: #89b4fa; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 0.8em; }
+  .badge-green { background: #1a3a1a; color: #a6e3a1; border: 1px solid #a6e3a1; }
+  .badge-blue { background: #1a1a3a; color: #89b4fa; border: 1px solid #89b4fa; }
+  .structure { font-family: monospace; line-height: 1.8; white-space: pre; background: #11111b; padding: 15px; border-radius: 8px; }
+  .footer { margin-top: 30px; text-align: center; color: #6c7086; font-size: 0.9em; }
+</style></head>
+<body>
+  <h1>📋 PR #2252 — CLAUDE.md for Next.js + SQLite SaaS</h1>
+  <p class="tagline">Production-ready, opinionated CLAUDE.md for greenfield SaaS projects</p>
+
+  <div class="section">
+    <h2>📦 Tech Stack</h2>
+    <p><span class="badge badge-green">Next.js 15</span> <span class="badge badge-blue">SQLite + Drizzle</span> <span class="badge badge-green">Lucia Auth</span> <span class="badge badge-blue">Tailwind + shadcn</span></p>
+  </div>
+
+  <div class="section">
+    <h2>⚠️ Golden Rules (4)</h2>
+    <div class="rule"><h3>🔴 1. NEVER use fetch() for internal API calls</h3><p>Use Server Actions instead. Fetching your own API adds latency and bypasses type safety.</p></div>
+    <div class="rule"><h3>🔴 2. DB queries stay in lib/db/queries/</h3><p>One file per query group. No inline SQL in Components or Actions.</p></div>
+    <div class="rule"><h3>🔴 3. Every mutation has a loading state</h3><p>Server Actions return discriminated unions with <span class="code">useActionState</span> wrapper.</p></div>
+    <div class="rule"><h3>🔴 4. Migrations are immutable once merged</h3><p>Never modify a merged migration — create a new one to preserve audit trail.</p></div>
+  </div>
+
+  <div class="section">
+    <h2>📁 Project Structure</h2>
+    <div class="structure">src/
+├── app/                    # App Router
+│   ├── (auth)/             # Login/Register
+│   ├── (dashboard)/        # Auth pages
+│   └── api/webhooks/       # Stripe webhooks
+├── components/
+│   ├── ui/                 # shadcn/ui
+│   ├── forms/              # RHF wrappers
+│   └── layout/             # Sidebar, navbar
+├── lib/
+│   ├── db/schema/          # Drizzle tables
+│   │   ├── users.ts
+│   │   ├── teams.ts
+│   │   └── subscriptions.ts
+│   ├── db/queries/         # Reads
+│   ├── db/mutations/       # Writes
+│   ├── db/migrations/      # drizzle-kit
+│   └── db/index.ts         # DB client
+├── actions/                # Server Actions
+└── middleware.ts</div>
+  </div>
+
+  <div class="section">
+    <h2>🏷️ Naming Conventions</h2>
+    <table>
+      <tr><th>What</th><th>Convention</th><th>Example</th></tr>
+      <tr><td>Server Actions</td><td>domain.action.ts</td><td>billing.actions.ts</td></tr>
+      <tr><td>DB queries</td><td>entity.ts</td><td>subscriptions.ts</td></tr>
+      <tr><td>Components</td><td>PascalCase</td><td>PricingTable.tsx</td></tr>
+      <tr><td>Tables</td><td>snake_case, plural</td><td>team_members</td></tr>
+      <tr><td>Columns</td><td>snake_case</td><td>stripe_customer_id</td></tr>
+    </table>
+  </div>
+
+  <div class="footer">✅ 145+ lines · 4 Golden Rules · Project structure · Naming conventions · Dev commands · Anti-patterns</div>
+</body></html>
