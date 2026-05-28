@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>PR #2253 - PR Review Agent Demo</title><style>
+  body { background: #1e1e2e; color: #cdd6f4; font-family: 'Segoe UI', sans-serif; padding: 20px; max-width: 800px; margin: auto; }
+  h1 { color: #89b4fa; border-bottom: 2px solid #89b4fa; }
+  h2 { color: #a6e3a1; margin-top: 25px; }
+  h3 { color: #f9e2af; }
+  .sample-box { background: #181825; border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 4px solid #89b4fa; }
+  .risk-high { color: #f38ba8; } .risk-med { color: #f9e2af; } .risk-low { color: #a6e3a1; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+  th, td { padding: 8px; text-align: left; border-bottom: 1px solid #313244; }
+  th { background: #181825; color: #89b4fa; }
+  .confidence { font-size: 1.2em; padding: 10px; border-radius: 8px; display: inline-block; }
+  .medium { background: #2a2a1a; color: #f9e2af; border: 1px solid #f9e2af; }
+  .real-box { background: #181825; border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 4px solid #a6e3a1; }
+  .footer { margin-top: 30px; text-align: center; color: #6c7086; font-size: 0.9em; }
+  .cmd { color: #89b4fa; font-family: monospace; background: #11111b; padding: 5px 10px; border-radius: 4px; }
+</style></head>
+<body>
+  <h1>🤖 PR #2253 — PR Review Agent</h1>
+  <p>CLI-based PR review agent using GitHub API + security pattern detection.</p>
+
+  <div class="sample-box">
+    <h2>📋 Sample Mode</h2>
+    <p><span class="cmd">$ bash claude-review.sh --sample</span></p>
+    <p><strong>Files changed:</strong> 8 files (+245/-67 lines)</p>
+    
+    <h3>⚠️ Identified Risks</h3>
+    <table>
+      <tr><th>Risk</th><th>Severity</th><th>Location</th></tr>
+      <tr><td>JWT secret hardcoded</td><td class="risk-high">🔴 High</td><td>auth/config.ts:12</td></tr>
+      <tr><td>No token revocation</td><td class="risk-med">🟡 Medium</td><td>auth/session.ts:45</td></tr>
+      <tr><td>Rate limit too aggressive</td><td class="risk-low">🟢 Low</td><td>middleware/ratelimit.ts:8</td></tr>
+    </table>
+    
+    <h3>✅ Confidence Score</h3>
+    <div class="confidence medium">Medium — Code structure is clear but several security concerns need addressing</div>
+  </div>
+
+  <div class="real-box">
+    <h2>🔍 Real PR Mode (PR #2251)</h2>
+    <p><span class="cmd">$ bash claude-review.sh --pr https://github.com/.../pull/2251</span></p>
+    <p><strong>✅ PR #2251:</strong> feat: CHANGELOG generator (6 files +270/-37)</p>
+    
+    <h3>⚠️ Detected Issues</h3>
+    <ul>
+      <li class="risk-high">🔴 Dangerous function usage (eval/exec detected)</li>
+      <li class="risk-low">🟢 TODOs/FIXMEs in code</li>
+    </ul>
+    
+    <h3>✅ Confidence Score: Low</h3>
+  </div>
+
+  <div class="footer">✅ Probado con: modo sample + PR real | Detecta: secretos, eval, XSS, TODOs</div>
+</body></html>
