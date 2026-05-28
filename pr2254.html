@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>PR #2254 - Pre-Tool-Use Hook Demo</title><style>
+  body { background: #1e1e2e; color: #cdd6f4; font-family: 'Courier New', monospace; padding: 20px; }
+  .container { max-width: 800px; margin: auto; }
+  h1 { color: #f38ba8; border-bottom: 2px solid #f38ba8; }
+  .test { margin: 15px 0; padding: 15px; border-radius: 8px; white-space: pre; }
+  .blocked { background: #2a1a1a; border-left: 4px solid #f38ba8; }
+  .allowed { background: #1a2a1a; border-left: 4px solid #a6e3a1; }
+  .cmd { color: #89b4fa; margin-bottom: 8px; }
+  .result-blocked { color: #f38ba8; font-weight: bold; font-size: 1.1em; }
+  .result-allowed { color: #a6e3a1; font-weight: bold; font-size: 1.1em; }
+  .log { background: #181825; padding: 15px; border-radius: 4px; font-size: 13px; line-height: 1.8; }
+  .footer { margin-top: 30px; text-align: center; color: #6c7086; }
+</style></head>
+<body><div class="container">
+  <h1>🛡️ PR #2254 — Pre-Tool-Use Hook</h1>
+  <div class="test blocked"><div class="cmd">$ bash pre-tool-use.sh "rm -rf /important-data"</div>╔══════════════════════════════════════════╗<br>║  🚫 BLOCKED: Destructive command detected ║<br>╚══════════════════════════════════════════╝<br><span class="result-blocked">✅ BLOQUEADO</span></div>
+  <div class="test blocked"><div class="cmd">$ bash pre-tool-use.sh "DROP TABLE users"</div>╔══════════════════════════════════════════╗<br>║  🚫 BLOCKED: Destructive command detected ║<br>╚══════════════════════════════════════════╝<br><span class="result-blocked">✅ BLOQUEADO</span></div>
+  <div class="test allowed"><div class="cmd">$ bash pre-tool-use.sh "ls -la"</div><span class="result-allowed">✅ PERMITIDO (sin bloqueo)</span></div>
+  <div class="test blocked"><div class="cmd">$ bash pre-tool-use.sh "git push --force origin main"</div>╔══════════════════════════════════════════╗<br>║  🚫 BLOCKED: Destructive command detected ║<br>╚══════════════════════════════════════════╝<br><span class="result-blocked">✅ BLOQUEADO</span></div>
+  <h2>📝 Log de bloqueos</h2>
+  <div class="log">[BLOCKED] 2026-05-28T20:35:27Z | cmd: rm -rf /important-data | pattern: rm -rf /<br>[BLOCKED] 2026-05-28T20:35:27Z | cmd: DROP TABLE users | pattern: DROP TABLE<br>[BLOCKED] 2026-05-28T20:35:27Z | cmd: git push --force origin main | pattern: git push --force</div>
+  <div class="footer">✅ 4 tests pasados, registro de logs funcionando</div>
+</div></body></html>

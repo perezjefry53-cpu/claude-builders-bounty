@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>PR #2251 - CHANGELOG Generator Demo</title><style>
+  body { background: #1e1e2e; color: #cdd6f4; font-family: 'Courier New', monospace; padding: 20px; }
+  .container { max-width: 800px; margin: auto; }
+  h1 { color: #a6e3a1; border-bottom: 2px solid #a6e3a1; }
+  .success { color: #a6e3a1; font-size: 1.2em; }
+  .stats { color: #f9e2af; }
+  .section { margin: 20px 0; padding: 15px; background: #181825; border-radius: 8px; border-left: 4px solid #89b4fa; }
+  .tag { color: #89b4fa; font-weight: bold; font-size: 1.1em; }
+  .added { color: #a6e3a1; } .fixed { color: #f38ba8; }
+  .changed { color: #f9e2af; } .removed { color: #fab387; }
+  .footer { margin-top: 30px; text-align: center; color: #6c7086; }
+</style></head>
+<body><div class="container">
+  <h1>📋 PR #2251 — CHANGELOG Generator</h1>
+  <div class="section"><div class="success">✅ Generated: CHANGELOG.md</div><div class="stats">📊 8 changes logged</div></div>
+  <div class="section"><div class="tag">## [Unreleased]</div><div class="commit added">  ✨ add export functionality</div></div>
+  <div class="section"><div class="tag">## v0.1.0</div><div class="commit changed">  ♻️ initial project setup</div></div>
+  <div class="section"><div class="tag">## v0.2.0</div><div class="commit added">  ✨ add user authentication module</div><div class="commit fixed">  🐛 resolve race condition in session handler</div><div class="commit changed">  ♻️ add API documentation</div></div>
+  <div class="section"><div class="tag">## v0.3.0</div><div class="commit added">  ✨ implement file upload API</div><div class="commit fixed">  🐛 prevent XSS in user input</div><div class="commit changed">  ♻️ simplify database queries</div></div>
+  <div class="footer">✅ Probado con commits convencionales (feat:, fix:, docs:, refactor:, chore:)</div>
+</div></body></html>
